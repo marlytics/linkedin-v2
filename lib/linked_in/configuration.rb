@@ -21,7 +21,7 @@ module LinkedIn
                   :scope,
                   :client_id,
                   :token_url,
-                  :api_version,
+                  :linkedin_version,
                   :redirect_uri,
                   :authorize_url,
                   :client_secret,
@@ -32,10 +32,10 @@ module LinkedIn
 
     def initialize
       @api = "https://api.linkedin.com"
-      @api_version = "/v2"
+      @linkedin_version = "202210"
       @site = "https://www.linkedin.com"
-      @token_url = "/uas/oauth2/accessToken"
-      @authorize_url = "/uas/oauth2/authorization"
+      @token_url = "/oauth/v2/accessToken"
+      @authorize_url = "/oauth/v2/authorization"
     end
   end
 end

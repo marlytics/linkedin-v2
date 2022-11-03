@@ -29,7 +29,7 @@ module LinkedIn
 
 
     def default_url
-      LinkedIn.config.api + LinkedIn.config.api_version
+      LinkedIn.config.api
     end
   end
 end

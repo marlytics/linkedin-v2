@@ -4,7 +4,7 @@ describe LinkedIn::Connection do
   end
 
   it "has the correct default url" do
-    url = LinkedIn.config.api + LinkedIn.config.api_version
+    url = LinkedIn.config.api
     expect(subject.url_prefix.to_s).to eq url
   end
 end

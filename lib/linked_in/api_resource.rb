@@ -130,7 +130,7 @@ module LinkedIn
     end
 
     def profile_path(options={}, allow_multiple=true)
-      path = "/people"
+      path = "v2/people"
 
       id = options.delete(:id)
       url = options.delete(:url)
@@ -145,7 +145,7 @@ module LinkedIn
       elsif allow_multiple and (ids or urls)
         path += multiple_people_path(ids, urls)
       else
-        path = "/me"
+        path = "v2/me"
       end
     end
 

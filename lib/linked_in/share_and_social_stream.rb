@@ -53,20 +53,23 @@ module LinkedIn
     #  2.) For organization shares, you may only post shares as an organization for which the
     #      authorized member is an administrator.
     #
-    # @see https://developer.linkedin.com/docs/guide/v2/shares/share-api#post
+    # @see https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api?view=li-lms-2022-10&tabs=http#create-organic-posts
     #
-    # @option options [String] :owner, the URN of the entity posting the share.
     # @return [LinkedIn::Mash]
     #
     def share(options = {})
-      path = '/shares'
-      defaults = {
+      path = 'rest/posts'
+      defaults ={
+        visibility: "PUBLIC",
         distribution: {
-          linkedInDistributionTarget: {
-            visibleToGuest: true
-          }
-        }
+          feedDistribution: "MAIN_FEED",
+          targetEntities: [],
+          thirdPartyDistributionChannels: []
+        },
+        lifecycleState: "PUBLISHED",
+        isReshareDisabledByAuthor: false
       }
+
       post(path, MultiJson.dump(defaults.merge(options)), 'Content-Type' => 'application/json')
     end
 

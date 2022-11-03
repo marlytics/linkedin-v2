@@ -89,7 +89,12 @@ module LinkedIn
 
     def default_headers
       # https://developer.linkedin.com/documents/api-requests-json
-      return {"x-li-format" => "json", "Authorization" => "Bearer #{@access_token.token}"}
+      return {
+        "Content-Type" => "application/json",
+        "Authorization" => "Bearer #{@access_token.token}",
+        "LinkedIn-Version" => LinkedIn.config.linkedin_version,
+        "X-Restli-Protocol-Version" => "2.0.0"
+      }
     end
 
     def verify_access_token!(access_token)
