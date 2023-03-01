@@ -4,9 +4,8 @@ module LinkedIn
   class RefreshToken < APIResource
 
     def refresh_token(options = {})
-      # TODO: change url here
-      path = "/accessToken"
-      get(path, options)
+      path = 'oauth/v2/accessToken'
+      post(path, options, 'Content-Type' => 'application/x-www-form-urlencoded')
     end
 
   end
