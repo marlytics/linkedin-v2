@@ -14,6 +14,12 @@ module LinkedIn
         conn.adapter Faraday.default_adapter
       end
 
+      @oauth_connection =
+        LinkedIn::Connection.new params: default_params, headers: default_headers, url: 'https://www.linkedin.com/oauth/v2' do |conn|
+        conn.request :multipart
+        conn.adapter Faraday.default_adapter
+      end
+
       initialize_endpoints
     end
 
@@ -67,6 +73,8 @@ module LinkedIn
     def_delegators :@media, :summary,
                             :upload
 
+    def_delegators :@refresh_token, :refresh_token
+
     private ##############################################################
 
     def initialize_endpoints
@@ -77,6 +85,7 @@ module LinkedIn
       @communications = LinkedIn::Communications.new(@connection)
       @share_and_social_stream = LinkedIn::ShareAndSocialStream.new(@connection)
       @media = LinkedIn::Media.new(@connection)
+      @refresh_token = LinkedIn::RefreshToken.new(@oauth_connection)
       # @groups = LinkedIn::Groups.new(@connection) not supported by v2 API?
     end
 
