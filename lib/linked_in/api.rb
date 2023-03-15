@@ -9,16 +9,16 @@ module LinkedIn
       @access_token = access_token
 
       @connection =
-        LinkedIn::Connection.new params: default_params, headers: default_headers do |conn|
-        conn.request :multipart
-        conn.adapter Faraday.default_adapter
-      end
+        LinkedIn::Connection.new(params: default_params, headers: default_headers) do |conn|
+          conn.request :multipart
+          conn.adapter Faraday.default_adapter
+        end
 
       @oauth_connection =
-        LinkedIn::Connection.new params: default_params, headers: default_headers, url: LinkedIn.config.site do |conn|
-        conn.request :url_encoded
-        conn.adapter Faraday.default_adapter
-      end
+        LinkedIn::Connection.new(params: default_params, headers: default_headers, url: LinkedIn.config.site) do |conn|
+          conn.request :url_encoded
+          conn.adapter Faraday.default_adapter
+        end
 
       initialize_endpoints
     end
