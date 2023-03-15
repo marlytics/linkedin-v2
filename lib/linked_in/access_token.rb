@@ -11,7 +11,7 @@ module LinkedIn
     # @param [String] token the access token
     # @param [FixNum] expires_in number of seconds the token lasts for
     # @param [Time] expires_at when the token will expire.
-    def initialize(token=nil, expires_in=nil, expires_at=nil, refresh_token=nil, refresh_token_expires_in=nil)
+    def initialize(token = nil, expires_in = nil, expires_at = nil, refresh_token = nil, refresh_token_expires_in = nil)
       self.token = token
       self.expires_in = expires_in
       self.refresh_token = refresh_token
