@@ -1,7 +1,7 @@
 module LinkedIn
   # A simple data object to contain the token string and expiration data.
   class AccessToken
-    attr_accessor :token, :expires_in, :expires_at
+    attr_accessor :token, :expires_in, :expires_at, :refresh_token, :refresh_token_expires_in
 
     # Creates a simple data wrapper for an access token.
     #
@@ -11,9 +11,11 @@ module LinkedIn
     # @param [String] token the access token
     # @param [FixNum] expires_in number of seconds the token lasts for
     # @param [Time] expires_at when the token will expire.
-    def initialize(token=nil, expires_in=nil, expires_at=nil)
+    def initialize(token = nil, expires_in = nil, expires_at = nil, refresh_token = nil, refresh_token_expires_in = nil)
       self.token = token
       self.expires_in = expires_in
+      self.refresh_token = refresh_token
+      self.refresh_token_expires_in = refresh_token_expires_in
       if expires_at.nil? and not self.expires_in.nil?
         self.expires_at = Time.now + expires_in
       else
