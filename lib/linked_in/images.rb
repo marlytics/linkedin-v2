@@ -1,14 +1,10 @@
 module LinkedIn
-  #
   #  Images API
   # @see https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/images-api
-  #
   class Images < APIResource
-    #
     #  Initializing the upload
     #  @see https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/images-api?view=li-lms-2023-05&tabs=http#initialize-image-upload
     #  @options options [String] :owner, the urn of the owner of the image
-    #
     def upload_url(options = {})
       path = "rest/images?action=initializeUpload"
       response =  post(path, params(options))
@@ -17,7 +13,6 @@ module LinkedIn
       { url: value['uploadUrl'], urn: value['image'] }
     end
 
-    #
     #  Uploading the Image
     #  Note: `Content-Type` header although not mentioned in the docs is required, the upload fails with 400 without it.
     #  @see https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/vector-asset-api?view=li-lms-2023-05&tabs=http#upload-the-image
