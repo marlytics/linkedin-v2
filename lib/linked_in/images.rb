@@ -28,6 +28,10 @@ module LinkedIn
     end
 
     private
+    
+    def params(options)
+      MultiJson.dump({ initializeUploadRequest: options })
+    end
 
     def file(source_url)
       URI.parse(source_url).open { |f| f.read }
