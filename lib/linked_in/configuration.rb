@@ -1,5 +1,3 @@
-require 'date'
-
 module LinkedIn
   # Configuration for the LinkedIn gem.
   #
@@ -34,20 +32,9 @@ module LinkedIn
 
     def initialize
       @api = "https://api.linkedin.com"
-      @linkedin_version = set_linkedin_version
       @site = "https://www.linkedin.com"
       @token_url = "/oauth/v2/accessToken"
       @authorize_url = "/oauth/v2/authorization"
-    end
-
-    private
-
-    ## Setting up LinkedIn API version dynamically.
-    # Evaluating LinkedIn API version published 45 days before.
-    # Keeping buffer of 45 days to not get affected due to any recent changes
-    # LinkedIn APIs which might need changes in this gem.
-    def set_linkedin_version
-      (Date.today - 45).strftime("%Y%m")
     end
   end
 end
