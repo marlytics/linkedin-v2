@@ -3,14 +3,14 @@ require 'date'
 module LinkedIn
   class API
 
-    attr_accessor :access_token, :linkedin_api_version
+    attr_accessor :access_token, :api_version
 
-    def initialize(access_token=nil, linkedin_api_version=nil)
+    def initialize(access_token=nil, api_version=nil)
       access_token = parse_access_token(access_token)
       verify_access_token!(access_token)
       @access_token = access_token
 
-      verify_linkedin_api_version!(linkedin_api_version)
+      verify_api_version!(api_version)
 
       @connection =
         LinkedIn::Connection.new(params: default_params, headers: default_headers) do |conn|
@@ -105,7 +105,7 @@ module LinkedIn
       return {
         "Content-Type" => "application/json",
         "Authorization" => "Bearer #{@access_token.token}",
-        "LinkedIn-Version" => @linkedin_api_version,
+        "LinkedIn-Version" => @api_version,
         "X-Restli-Protocol-Version" => "2.0.0"
       }
     end
@@ -129,11 +129,11 @@ module LinkedIn
       LinkedIn::InvalidRequest.new(msg)
     end
 
-    def verify_linkedin_api_version!(version)
-      @linkedin_api_version = if version.nil?
-        recent_linkedin_api_version
+    def verify_api_version!(version)
+      @api_version = if version.nil?
+        recent_api_version
       else
-        validate_linkedin_api_version!(version)
+        validate_api_version!(version)
       end
     end
 
@@ -141,8 +141,8 @@ module LinkedIn
     # LinkedIn Marketing API Program will publish new versions monthly,
     # and those versions will be supported for a minimum of one year.
     # Raise error if version is older than year.(Verifying with 11-months limit)
-    def validate_linkedin_api_version!(version)
-      date = Date.strptime(version,"%Y%m")
+    def validate_api_version!(version)
+      date = Date.strptime(version, '%Y%m')
       unless (Date.today - 330) < date
         msg = LinkedIn::ErrorMessages.unsupported_api_version
         raise LinkedIn::InvalidRequest.new(msg)
@@ -154,8 +154,8 @@ module LinkedIn
     ## Evaluating LinkedIn API version published 60 days before.
     # Keeping buffer of 60 days to not get affected due to any recent changes
     # in LinkedIn APIs which might need changes in this gem.
-    def recent_linkedin_api_version
-      (Date.today - 60).strftime("%Y%m")
+    def recent_api_version
+      (Date.today - 60).strftime('%Y%m')
     end
   end
 end
