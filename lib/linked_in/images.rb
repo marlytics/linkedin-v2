@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module LinkedIn
   #  Images API
   # @see https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/images-api
