@@ -9,7 +9,7 @@ module LinkedIn
     #  @options options [String] :owner, the urn of the owner of the image
     def upload_url(options = {})
       path = "rest/images?action=initializeUpload"
-      response =  post(path, params(options))
+      response = post(path, params(options))
       body = JSON.parse(response.body)
       value = body["value"]
       { url: value['uploadUrl'], urn: value['image'] }
@@ -21,7 +21,11 @@ module LinkedIn
     #  @options options [String] :owner, the urn of the owner of the image
     def upload_image(image, options)
       response = upload_url(options)
-      body = file(image)
+      body = if image.respond_to?(:read)
+               image.read
+             else
+               file(image)
+             end
       @connection.put(response[:url], body) do |req|
         req.headers['Content-Type'] = 'image/png'
       end
@@ -30,7 +34,7 @@ module LinkedIn
     end
 
     private
-    
+
     def params(options)
       MultiJson.dump({ initializeUploadRequest: options })
     end
