@@ -5,7 +5,7 @@ module LinkedIn
 
     attr_accessor :access_token, :api_version
 
-    def initialize(access_token=nil, api_version=nil)
+    def initialize(access_token = nil, api_version = nil)
       access_token = parse_access_token(access_token)
       verify_access_token!(access_token)
       @access_token = access_token
