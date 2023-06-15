@@ -21,11 +21,7 @@ module LinkedIn
     #  @options options [String] :owner, the urn of the owner of the image
     def upload_image(image, options)
       response = upload_url(options)
-      body = if image.respond_to?(:read)
-               image.read
-             else
-               file(image)
-             end
+      body = file(image)
       @connection.put(response[:url], body) do |req|
         req.headers['Content-Type'] = 'image/png'
       end
