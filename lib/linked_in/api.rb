@@ -140,10 +140,10 @@ module LinkedIn
     ## Verify the LinkedIn API version provided from caller.
     # LinkedIn Marketing API Program will publish new versions monthly,
     # and those versions will be supported for a minimum of one year.
-    # Raise error if version is older than year.(Verifying with 11-months limit)
+    # Raise error if version is older than year.
     def validate_api_version!(version)
       date = Date.strptime(version, '%Y%m')
-      unless (Date.today - 330) < date
+      if (Date.today - 365) > date
         msg = LinkedIn::ErrorMessages.unsupported_api_version
         raise LinkedIn::InvalidRequest.new(msg)
       end
