@@ -143,9 +143,11 @@ module LinkedIn
     # Raise error if version is older than year.
     def validate_api_version!(version)
       date = Date.strptime(version, '%Y%m')
-      if (Date.today - 365) > date
+      if (Date.today - 365) >= date
         msg = LinkedIn::ErrorMessages.unsupported_api_version
         raise LinkedIn::InvalidRequest.new(msg)
+      else (Date.today - 335) >= date
+        warn('WARNING: Use the most recent LinkedIn API version to prevent interruptions since your current version of the LinkedIn API is set to expire after a month.')
       end
 
       version
