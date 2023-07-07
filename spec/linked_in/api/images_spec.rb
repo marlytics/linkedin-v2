@@ -29,7 +29,7 @@ describe LinkedIn::Images do
   describe '#upload_image' do
     it 'uploads the image' do
       stub_request(:post, 'https://api.linkedin.com/rest/images?action=initializeUpload').to_return(body: response.to_json)
-      stub_request(:put, 'https://sample-linked-in-upload-url.com').with(headers: { 'Content-Type' => 'multipart/form-data' })
+      stub_request(:put, 'https://sample-linked-in-upload-url.com').with(headers: { 'Content-Type' => 'images/*' })
       stub_request(:get, 'http://example.org/elvis.png')
 
       expect(api.upload_image('http://example.org/elvis.png', response))
