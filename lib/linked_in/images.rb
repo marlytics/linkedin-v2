@@ -23,7 +23,7 @@ module LinkedIn
       response = upload_url(options)
       body = file(image)
       @connection.put(response[:url], body) do |req|
-        req.headers['Content-Type'] = 'images/*'
+        req.headers['Content-Type'] = 'image/*'
       end
 
       response[:urn]
