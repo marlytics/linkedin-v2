@@ -35,6 +35,7 @@ require "linked_in/communications"
 require "linked_in/share_and_social_stream"
 require 'linked_in/media'
 require 'linked_in/refresh_token'
+require 'linked_in/images'
 
 # The primary API object that makes requests.
 # It composes in all of the endpoints

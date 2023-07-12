@@ -79,6 +79,8 @@ module LinkedIn
 
     def_delegators :@refresh_token, :refresh_token
 
+    def_delegators :@images, :upload_url, :upload_image
+
     private ##############################################################
 
     def initialize_endpoints
@@ -90,6 +92,7 @@ module LinkedIn
       @share_and_social_stream = LinkedIn::ShareAndSocialStream.new(@connection)
       @media = LinkedIn::Media.new(@connection)
       @refresh_token = LinkedIn::RefreshToken.new(@oauth_connection)
+      @images = LinkedIn::Images.new(@connection)
       # @groups = LinkedIn::Groups.new(@connection) not supported by v2 API?
     end
 
