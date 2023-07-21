@@ -47,6 +47,7 @@ module LinkedIn
                   :redirect_uri,
                   :no_auth_code,
                   :no_access_token,
+                  :unsupported_api_version,
                   :credentials_missing,
                   :redirect_uri_mismatch,
                   :throttled
@@ -59,6 +60,8 @@ module LinkedIn
     @no_auth_code = "You must provide the authorization code passed to your redirect uri in the url params"
 
     @no_access_token = "You must have an access token to use LinkedIn's API. Use the LinkedIn::OAuth2 module to obtain an access token"
+
+    @unsupported_api_version = "You must pass valid LinkedIn API version. Verify the LinkedIn API version with LinkedIn docs."
 
     @credentials_missing = "Client credentials do not exist. Please either pass your client_id and client_secret to the LinkedIn::Oauth.new constructor or set them via LinkedIn.configure"
 

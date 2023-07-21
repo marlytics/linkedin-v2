@@ -5,4 +5,5 @@ gemspec
 
 group :test do
   gem "coveralls", require: false
+  gem 'timecop', '~> 0.9.2'
 end

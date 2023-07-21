@@ -1,4 +1,5 @@
 require "spec_helper"
+require "timecop"
 
 describe LinkedIn::API do
   context "With no access token" do
@@ -37,5 +38,34 @@ describe LinkedIn::API do
     subject {LinkedIn::API.new(access_token_obj)}
 
     include_examples "test access token"
+  end
+
+  describe 'api_version' do
+    let(:access_token) { 'dummy_access_token' }
+    before { Timecop.freeze(2023, 5, 25) }
+
+    context 'When no api_version is provided' do
+      subject { LinkedIn::API.new(access_token) }
+
+      it 'sets api_version to recent api version' do
+        expect(subject.api_version).to eq('202303')
+      end
+    end
+
+    context 'When valid api_version is provided' do
+      subject { LinkedIn::API.new(access_token, '202302') }
+
+      it 'sets api_version to given value' do
+        expect(subject.api_version).to eq('202302')
+      end
+    end
+
+    context 'When older api_version is provided' do
+      it 'raises error' do
+        expect {
+          LinkedIn::API.new(access_token, '202202')
+        }.to raise_error(LinkedIn::InvalidRequest, 'You must pass valid LinkedIn API version. Verify the LinkedIn API version with LinkedIn docs.')
+      end
+    end
   end
 end
