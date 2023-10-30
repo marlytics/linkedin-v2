@@ -8,7 +8,7 @@ module LinkedIn
     #  @see https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/images-api?view=li-lms-2023-05&tabs=http#initialize-image-upload
     #  @options options [String] :owner, the urn of the owner of the image
     def upload_url(options = {})
-      path = "rest/images?action=initializeUpload"
+      path = "v2/images?action=initializeUpload"
       response = post(path, params(options))
       body = JSON.parse(response.body)
       value = body["value"]
