@@ -20,7 +20,7 @@ describe LinkedIn::Images do
 
   describe '#upload_url' do
     it 'returns an upload url' do
-      stub_request(:post, 'https://api.linkedin.com/rest/images?action=initializeUpload').to_return(body: response.to_json)
+      stub_request(:post, 'https://api.linkedin.com/v2/images?action=initializeUpload').to_return(body: response.to_json)
       expect(api.upload_url({ 'owner' => 'urn:li:person:121211' }))
         .to eq(expected)
     end
@@ -28,7 +28,7 @@ describe LinkedIn::Images do
 
   describe '#upload_image' do
     it 'uploads the image' do
-      stub_request(:post, 'https://api.linkedin.com/rest/images?action=initializeUpload').to_return(body: response.to_json)
+      stub_request(:post, 'https://api.linkedin.com/v2/images?action=initializeUpload').to_return(body: response.to_json)
       stub_request(:put, 'https://sample-linked-in-upload-url.com').with(headers: { 'Content-Type' => 'image/*' })
       stub_request(:get, 'http://example.org/elvis.png')
 

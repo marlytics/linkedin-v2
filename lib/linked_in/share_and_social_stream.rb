@@ -58,7 +58,7 @@ module LinkedIn
     # @return [LinkedIn::Mash]
     #
     def share(options = {})
-      path = 'rest/posts'
+      path = 'v2/posts'
       defaults ={
         visibility: "PUBLIC",
         distribution: {
